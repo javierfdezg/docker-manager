@@ -10,6 +10,8 @@ init() {
   if ask "Initialize project?" Y; then
     if [ -f "${configFile}" ]; then
       if ask "Config file (${configFile}) is going to be overwritten. Continue?" N; then
+        echo
+      else
         exit
       fi
     fi

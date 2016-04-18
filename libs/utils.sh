@@ -1,9 +1,63 @@
-#!/bin/sh
+#!/bin/bash
+
+variables=(
+  "projectName::Project Name"
+  "projectAddonsDir::Docker addons directory"
+)
+
+defaults=(
+  "projectName::$(basename `pwd`)"
+  "projectAddonsDir::$(pwd)/docker-addons"
+)
+
+get_human_translation() {
+  for index in "${variables[@]}" ; do
+    KEY="${index%%::*}"
+    VALUE="${index##*::}"
+
+    if [[ "$KEY" == "$1" ]] ;
+    then
+      echo $VALUE
+    fi
+  done
+}
+
+get_default() {
+
+  defaultValue="";
+  for index in "${defaults[@]}" ; do
+    KEY="${index%%::*}"
+    VALUE="${index##*::}"
+
+    if [[ "$KEY" == "$1" ]] ;
+    then
+      defaultValue=$VALUE
+    fi
+  done
+
+  echo $defaultValue
+}
 
 add_variable() {
   if [ "$2" == "string" ];
   then
-    cat $1 | jq ".$3=\"test\"" | sponge $1
+    variable=$(get_human_translation $3)
+    default= $(get_default $3)
+
+    if [[ "$default" != "" ]];
+    then
+      variable="$variable ($default): "
+    else
+      variable="$variable: "
+    fi
+
+    read -p "$variable "  value
+    if [[ "$value" == "" ]];
+    then
+      value=$default
+    fi
+
+    cat $1 | jq ".$3=\"$value\"" | sponge $1
   fi
 }
 
