@@ -1,67 +1,6 @@
 #!/bin/bash
 
-variables=(
-  "projectName::Project Name"
-  "projectAddonsDir::Docker addons directory"
-)
-
-defaults=(
-  "projectName::$(basename `pwd`)"
-  "projectAddonsDir::$(pwd)/docker-addons"
-)
-
-get_human_translation() {
-  for index in "${variables[@]}" ; do
-    KEY="${index%%::*}"
-    VALUE="${index##*::}"
-
-    if [[ "$KEY" == "$1" ]] ;
-    then
-      echo "$VALUE"
-    fi
-  done
-}
-
-get_default() {
-  defaultValue="";
-  for index in "${defaults[@]}" ; do
-    KEY="${index%%::*}"
-    VALUE="${index##*::}"
-
-    if [[ "$KEY" == "$1" ]] ;
-    then
-      defaultValue=$VALUE
-    fi
-  done
-}
-
-add_variable() {
-
-  # String variables
-  if [ "$2" == "string" ];
-  then
-    variable=$(get_human_translation $3)
-    get_default $3
-
-    if [[ "$defaultValue" != "" ]];
-    then
-      variable="$variable ($defaultValue): "
-    else
-      variable="$variable: "
-    fi
-
-    read -p "$variable "  value
-    if [[ "$value" == "" ]];
-    then
-      value=$default
-    fi
-
-    cat $1 | jq ".$3=\"$value\"" | sponge $1
-  fi
-
-}
-
-erase() {
+initialize() {
   jq -n '{}' > $1
 }
 
@@ -97,5 +36,5 @@ ask() {
     done
 }
 
-export -f ask erase add_variable
+export -f ask initialize
 
