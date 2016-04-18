@@ -1,3 +1,9 @@
 #!/bin/sh
 
-echo "Docker Manager under construnction"
+. libs/utils.sh
+. libs/init.sh
+
+init
+
+
+
