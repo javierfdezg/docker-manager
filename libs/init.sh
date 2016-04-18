@@ -17,7 +17,7 @@ init() {
     initialize ${configFile};
 
     # Objects/Arrays must be created before inserting new attributes
-    # TODO: create parent objects dynamically
+    # TODO: Issue #3: Adding a variable to a path should create parent objects
     
     echo "Project config"
     add_variable ${configFile} "string" "projectName"
