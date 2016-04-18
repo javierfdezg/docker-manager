@@ -1,13 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-add_variable() {
-  if [ "$2" == "string" ];
-  then
-    cat $1 | jq ".$3=\"test\"" | sponge $1
-  fi
-}
-
-erase() {
+initialize() {
   jq -n '{}' > $1
 }
 
@@ -43,5 +36,5 @@ ask() {
     done
 }
 
-export -f ask erase add_variable
+export -f ask initialize
 
