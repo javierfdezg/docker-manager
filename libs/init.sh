@@ -15,8 +15,8 @@ init() {
         exit
       fi
     fi
-    
-    erase ${configFile};  
+
+    erase ${configFile};
 
     add_variable ${configFile} "string" "projectName"
     add_variable ${configFile} "string" "projectAddonsDir"

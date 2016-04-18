@@ -17,13 +17,12 @@ get_human_translation() {
 
     if [[ "$KEY" == "$1" ]] ;
     then
-      echo $VALUE
+      echo "$VALUE"
     fi
   done
 }
 
 get_default() {
-
   defaultValue="";
   for index in "${defaults[@]}" ; do
     KEY="${index%%::*}"
@@ -34,19 +33,19 @@ get_default() {
       defaultValue=$VALUE
     fi
   done
-
-  echo $defaultValue
 }
 
 add_variable() {
+
+  # String variables
   if [ "$2" == "string" ];
   then
     variable=$(get_human_translation $3)
-    default= $(get_default $3)
+    get_default $3
 
-    if [[ "$default" != "" ]];
+    if [[ "$defaultValue" != "" ]];
     then
-      variable="$variable ($default): "
+      variable="$variable ($defaultValue): "
     else
       variable="$variable: "
     fi
@@ -59,6 +58,7 @@ add_variable() {
 
     cat $1 | jq ".$3=\"$value\"" | sponge $1
   fi
+
 }
 
 erase() {
