@@ -6,7 +6,77 @@
 . libs/container.sh
 . libs/variables.sh
 
-init
 
+general_help() {
+	echo "Available commands: "
+	echo "init"
+	echo "delete"
+	echo "run"
+	echo "connect"
+	echo "status"
+}
+
+run_help() {
+	echo "run_help"
+}
+
+help() {
+	case "$1" in 
+		"run")
+			run_help
+			;;
+		*) 
+			general_help
+			;;
+	esac
+}
+
+delete() {
+	echo "delete $@"
+}
+
+container() {
+	echo "container $@"
+}
+
+connect() {
+	echo "connect $@"
+}
+
+status() {
+	echo "status $@"
+}
+
+case "$1" in 
+	"init")
+		shift
+		if [[ "$#" > 0 ]]; 
+		then 
+			echo "Parameters not expected: $@"
+			exit
+		else
+			init
+		fi
+		;;
+	"delete")
+		shift
+		delete $@
+		;;
+	"run")
+		shift
+		container $@
+		;;
+	"connect")
+		shift
+		connect $@
+		;;
+	"status")
+		shift
+		status $@
+		;;
+	*)
+		help
+		;;
+	esac
 
 
