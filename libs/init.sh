@@ -1,8 +1,25 @@
 #!/bin/bash
 
+# Init related functions
+
+# Changing this value will brake the system. Use this variable for developing
+# purposes only. You've been warned ;)
 configFile='.dmconfig'
 
-declare -a supportedComponents=(db webserver)
+# Start of not exported functions
+
+init_help() {
+  echo "$(basename "$0") init"
+  echo 
+  echo "This command creates a docker-managed directory - basically a configuration file"
+  echo "that tells $(basename "$0") that this directory is being docker-managed."
+  echo 
+  echo "If you execute $(basename "$0") init, you will be asked if you want to initialize"
+  echo "this directory (or reinitialize it if you did it before). This will launch a "
+  echo "wizard that will generate a JSON configuration file and prompt for the config"
+  echo "values." 
+  echo
+}
 
 init() {
   if ask "Initialize project?" Y; then
@@ -60,4 +77,21 @@ init() {
   fi
 }
 
-export -f init
+# End of not exported functions
+
+# Start of exported functions
+
+prepare_init() {
+  case $1 in
+    "")
+      init
+      ;;
+    *|-h|--help)
+      help "init"
+      ;;
+  esac
+}
+
+# End of exported functions
+
+export -f prepare_init

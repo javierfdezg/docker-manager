@@ -5,76 +5,54 @@
 . libs/init.sh
 . libs/container.sh
 . libs/variables.sh
-
-
-general_help() {
-	echo "Available commands: "
-	echo "init"
-	echo "delete"
-	echo "run"
-	echo "connect"
-	echo "status"
-}
-
-run_help() {
-	echo "run_help"
-}
+. libs/delete.sh
+. libs/delete-image.sh
+. libs/delete-container.sh
+. libs/status.sh
+. libs/connect.sh
+. libs/run.sh
+. libs/stop.sh
 
 help() {
-	case "$1" in 
-		"run")
-			run_help
-			;;
-		*) 
-			general_help
-			;;
-	esac
-}
-
-delete() {
-	echo "delete $@"
-}
-
-container() {
-	echo "container $@"
-}
-
-connect() {
-	echo "connect $@"
-}
-
-status() {
-	echo "status $@"
+  echo "Docker Workflow Manager"
+  echo "Usage: $(basename $0) {command} [subcomand] [--help|-h]"
+  echo
+  echo "Available commands:"
+  echo
+  echo  "init\t\tCreate a new docker-managed directory o reinitialize an existing one"
+  echo  "delete\t\tSet of tools to delete images and containers"
+  echo  "run\t\tCreate a container and run it (or only run it if it exists)"
+  echo  "status\t\tDisplay the status of the container"
+  echo  "connect\t\tConnect to the container"
+  echo  
 }
 
 case "$1" in 
-	"init")
+	init)
 		shift
-		if [[ "$#" > 0 ]]; 
-		then 
-			echo "Parameters not expected: $@"
-			exit
-		else
-			init
-		fi
+    prepare_init $@
 		;;
-	"delete")
+  delete)
 		shift
-		delete $@
+		prepare_delete $@
 		;;
-	"run")
+	run)
 		shift
-		container $@
+		prepare_run $@
 		;;
-	"connect")
+	stop)
 		shift
-		connect $@
+		prepare_stop $@
 		;;
-	"status")
+	connect)
 		shift
-		status $@
+		prepare_connect $@
 		;;
-	*)
+	status)
+		shift
+		prepare_status $@
+		;;
+	*|--help|-h)
 		help
 		;;
 	esac
