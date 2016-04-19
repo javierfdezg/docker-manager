@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Init related functions
+
 add_object_to_array() {
 
 	IFS=':' read -r -a array <<< $3
@@ -22,3 +24,11 @@ container_add_objects_to_array() {
 }
 
 export -f container_add_objects_to_array
+
+# End of init related functions
+
+container_help() {
+	echo "Container help"
+}
+
+export -f container_help

@@ -5,8 +5,56 @@
 . libs/init.sh
 . libs/container.sh
 . libs/variables.sh
+. libs/delete.sh
+. libs/delete-image.sh
+. libs/delete-container.sh
+. libs/status.sh
+. libs/connect.sh
+. libs/run.sh
+. libs/stop.sh
 
-init
+help() {
+  echo "Docker Workflow Manager"
+  echo "Usage: $(basename $0) {command} [subcomand] [--help|-h]"
+  echo
+  echo "Available commands:"
+  echo
+  echo  "init\t\tCreate a new docker-managed directory o reinitialize an existing one"
+  echo  "delete\t\tSet of tools to delete images and containers"
+  echo  "run\t\tCreate a container and run it (or only run it if it exists)"
+  echo  "status\t\tDisplay the status of the container"
+  echo  "connect\t\tConnect to the container"
+  echo  
+}
 
+case "$1" in 
+	init)
+		shift
+    prepare_init $@
+		;;
+  delete)
+		shift
+		prepare_delete $@
+		;;
+	run)
+		shift
+		prepare_run $@
+		;;
+	stop)
+		shift
+		prepare_stop $@
+		;;
+	connect)
+		shift
+		prepare_connect $@
+		;;
+	status)
+		shift
+		prepare_status $@
+		;;
+	*|--help|-h)
+		help
+		;;
+	esac
 
 
