@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Variable related functions/variables
+
+# Start of not exported functions
+
 variables=(
   "projectName::Project Name"
   "projectAddonsDir::Docker addons directory"
@@ -68,6 +72,10 @@ get_default() {
   done
 }
 
+# End of not exported functions
+
+# Start of exported functions
+
 add_variable() {
 
   # String variables
@@ -117,4 +125,14 @@ add_variable() {
   fi 
 }
 
-export -f add_variable
+get_variable() {
+
+  configFile=$1
+  path=$2
+  
+  requested_var=$(cat $1 | jq ".$path" )
+}
+
+# End of exported functions
+
+export -f add_variable get_variable
