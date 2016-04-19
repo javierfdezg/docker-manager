@@ -5,9 +5,9 @@
 . libs/init.sh
 . libs/container.sh
 . libs/variables.sh
-. libs/delete.sh
 . libs/delete-image.sh
 . libs/delete-container.sh
+. libs/image.sh
 . libs/status.sh
 . libs/connect.sh
 . libs/run.sh
@@ -20,8 +20,10 @@ help() {
   echo "Available commands:"
   echo
   echo  "init\t\tCreate a new docker-managed directory o reinitialize an existing one"
-  echo  "delete\t\tSet of tools to delete images and containers"
+  echo  "image\t\tImage related commands"
+  echo  "container\tContainer related commands"
   echo  "run\t\tCreate a container and run it (or only run it if it exists)"
+  echo  "stop\t\tStop a running container"
   echo  "status\t\tDisplay the status of the container"
   echo  "connect\t\tConnect to the container"
   echo  
@@ -54,7 +56,7 @@ start_docker_vm() {
   dockerMachineCommand=$requested_var
 
   if [ "$dockerMachineCommand" != "" ]; then
-    ${dockerMachineCommand} ls | if ! grep --silent default*Running
+    ${dockerMachineCommand} ls | if ! grep --silent default.*Running
     then
       ${dockerMachineCommand} start
     fi
@@ -89,11 +91,11 @@ case "$1" in
 		shift
     prepare_init $@
 		;;
-  delete)
-		shift
+  image)
+    shift
     run_checks
-		prepare_delete $@
-		;;
+    prepare_image $@
+    ;;
 	run)
 		shift
     run_checks
