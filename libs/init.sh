@@ -4,7 +4,7 @@
 
 # Changing this value will brake the system. Use this variable for developing
 # purposes only. You've been warned ;)
-configFile='.dmconfig'
+configFile='dmconfig.json'
 
 # Start of not exported functions
 
