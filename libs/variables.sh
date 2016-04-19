@@ -122,15 +122,25 @@ add_variable() {
         container_add_objects_to_array 'components' $1 $3 $4
         ;;
     esac
-  fi 
+  fi
 }
 
 get_variable() {
 
   configFile=$1
   path=$2
-  
+
   requested_var=$(cat $1 | jq ".$path" )
+
+  # Detect the type of the variables
+  if [[ $requested_var == \"* ]]; then
+
+    # If the variable is a string, remove the quotes
+    requested_var=$(echo $requested_var | tr -d '"')
+  else
+      # TODO: Issue #8: Detect the type of the variables other than string and process them
+      echo
+  fi
 }
 
 # End of exported functions
