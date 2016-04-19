@@ -27,6 +27,29 @@ help() {
   echo  
 }
 
+check_initialization() {
+  if [ ! -f ${configFile} ]; then
+    echo "This directory has not been initialized for $(basename $0)".
+    echo
+    if ask "Do you want to initialize it now?" Y; then
+      prepare_init 
+    else
+      echo "You need to set up $(basename $0) before using it... exiting"
+      exit
+    fi
+  fi
+}
+
+check_config() {
+  # TODO: Issue #1: Check configuration file before running commands
+  return 1
+}
+
+run_checks() {
+  check_initialization
+  check_config
+}
+
 case "$1" in 
 	init)
 		shift
@@ -34,22 +57,27 @@ case "$1" in
 		;;
   delete)
 		shift
+    run_checks
 		prepare_delete $@
 		;;
 	run)
 		shift
+    run_checks
 		prepare_run $@
 		;;
 	stop)
 		shift
+    run_checks
 		prepare_stop $@
 		;;
 	connect)
 		shift
+    run_checks
 		prepare_connect $@
 		;;
 	status)
 		shift
+    run_checks
 		prepare_status $@
 		;;
 	*|--help|-h)
