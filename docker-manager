@@ -45,9 +45,43 @@ check_config() {
   return 1
 }
 
+# Attempt to start the VM default machine if its not running
+start_docker_vm() {
+
+  search_var="docker.dockerMachineCommand"
+  get_variable ${configFile} ${search_var}
+
+  dockerMachineCommand=$requested_var
+
+  if [ "$dockerMachineCommand" != "" ]; then
+    ${dockerMachineCommand} ls | if ! grep --silent default*Running
+    then
+      ${dockerMachineCommand} start
+    fi
+  else
+    echo "Could not check if VM is running due to:"
+    echo "Variable ${search_var} not found in ${configFile}"
+    exit
+  fi
+}
+
+# Load the docker environment variables
+load_docker_env() {
+  search_var="docker.dockerMachineCommand"
+  get_variable ${configFile} ${search_var}
+  if [ "$requested_var" != "" ]; then
+    eval $(${requested_var} env default)
+  else
+    echo "Variable ${search_var} not found in ${configFile}"
+    exit
+  fi
+}
+
 run_checks() {
   check_initialization
   check_config
+  start_docker_vm
+  load_docker_env
 }
 
 case "$1" in 
