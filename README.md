@@ -1,2 +1,2 @@
-# docker-wrapper
-Docker tools to enhance usability
+# docker-manager
+Docker tools to enhance docker usability upon development teams
