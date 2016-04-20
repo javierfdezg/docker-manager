@@ -28,17 +28,14 @@ prepare_image() {
       ;;
     generate)
       shift
-      # TODO
       prepare_generate_image $@
       ;;
     push)
       shift
-      # TODO
       prepare_push_image $@
       ;;
     pull)
       shift
-      # TODO
       prepare_pull_image $@
       ;;
     *|--help|-h)
