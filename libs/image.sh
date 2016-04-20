@@ -66,9 +66,6 @@ prepare_image() {
   esac
 }
 
-# Populate the image name for all the scripts
-populate_image_name 
-
 export -f prepare_image populate_image_name
 
 # End of exported functions
