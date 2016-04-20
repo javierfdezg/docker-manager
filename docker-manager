@@ -1,10 +1,13 @@
 #!/bin/sh
 
 # Import function files
+. libs/variables.sh
 . libs/utils.sh
 . libs/init.sh
 . libs/container.sh
-. libs/variables.sh
+. libs/generate-image.sh
+. libs/push-image.sh
+. libs/pull-image.sh
 . libs/delete-image.sh
 . libs/delete-container.sh
 . libs/image.sh

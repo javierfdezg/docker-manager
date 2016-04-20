@@ -10,11 +10,11 @@ image_help() {
   echo "Available subcommands:"
   echo
   echo "generate"
+  echo "pull"
   echo "push"
   echo "delete"
   echo
 }
-
 
 # End of not exported functions
 
@@ -35,6 +35,11 @@ prepare_image() {
       shift
       # TODO
       prepare_push_image $@
+      ;;
+    pull)
+      shift
+      # TODO
+      prepare_pull_image $@
       ;;
     *|--help|-h)
       image_help
