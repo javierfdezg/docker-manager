@@ -6,11 +6,13 @@
 
 delete_image() {
 
-  # Params: ask for confirmation
-  echo "$FUNCNAME"
-  # Get image name from config file
-  # If the container exists, delete the container
-  # execute docker command to delete image
+  if ask "Delete image ${IMAGE_NAME}?" Y; then
+    $0 container stop
+    $0 container delete
+
+    # TODO: detect if image exists before executing the command
+    docker rmi ${IMAGE_NAME} 
+  fi
 }
 
 delete_image_help() {

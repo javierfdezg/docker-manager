@@ -57,9 +57,11 @@ init() {
     add_variable ${configFile} "object" "container.run"
     add_variable ${configFile} "string" "container.run.hostName"
     add_variable ${configFile} "string" "container.run.mode"
+    add_variable ${configFile} "string" "container.run.command"
     add_variable ${configFile} "array"  "container.run.hostsFileEntries" "ip:host"
     add_variable ${configFile} "array"  "container.run.mounts"  "localDir:containerDir"
-    add_variable ${configFile} "array"  "container.run.components" "name:localPort:containerPort"
+    add_variable ${configFile} "array"  "container.run.services" "name:localPort:containerPort"
+
     echo
 
     if ask "Done! You might want to add your ${configFile} file to .gitignore. Do you want me to do it now?" Y; then

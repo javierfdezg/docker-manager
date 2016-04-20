@@ -13,6 +13,7 @@ variables=(
   "container.run.hostName::Container host name"
   "docker.dockerMachineCommand::Docker Machine command"
   "docker.repository::DockerHub repository"
+  "docker.container.run.command::Docker container run command"
   "host::Host"
   "ip::IP"
   "localDir::Local Directory"
@@ -119,8 +120,8 @@ add_variable() {
       "container.run.mounts")
         container_add_objects_to_array 'mount points' $1 $3 $4
         ;;
-      "container.run.components")
-        container_add_objects_to_array 'components' $1 $3 $4
+      "container.run.services")
+        container_add_objects_to_array 'services' $1 $3 $4
         ;;
     esac
   fi
@@ -138,9 +139,8 @@ get_variable() {
 
     # If the variable is a string, remove the quotes
     requested_var=$(echo $requested_var | tr -d '"')
-  else
-      # TODO: Issue #8: Detect the type of the variables other than string and process them
-      echo
+  elif [[ "$requested_var" == "null" ]]; then
+    requested_var=""
   fi
 }
 

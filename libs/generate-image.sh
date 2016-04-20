@@ -7,10 +7,22 @@
 generate_image() {
 
   # Params: ask for confirmation
-  echo "$FUNCNAME"
-  # Get repository and image name from config file
-  # Stop container
-  # Delete container
+  if ask "Generate image?" Y; then
+    if [ ! -f ./Dockerfile ]; then
+      echo "Dockerfile not detected in the current directory. Exiting."
+      exit
+    fi
+
+    # TODO: delete image if exists
+    # TODO: stop container if its running
+    # TODO: delete container if exist
+
+    echo "Generating image with name ${IMAGE_NAME}"
+    echo
+    docker build -t ${IMAGE_NAME} .
+  else
+    exit
+  fi
 }
 
 generate_image_help() {

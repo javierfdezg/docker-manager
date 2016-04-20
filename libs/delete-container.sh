@@ -6,15 +6,23 @@
 
 delete_container() {
 
-  # Params: ask for confirmation
-  echo "$FUNCNAME"
-  # Get container name from config file
-  # Stop container if its running
-  # execute docker command to delete container
+  status_container
+  case $? in 
+    0)
+      echo "No container ${CONTAINER_NAME} found. Doing nothing."
+      exit
+      ;;
+    1)
+      $0 container stop
+      ;;
+  esac
+
+  echo "Deleting container ${CONTAINER_NAME}"
+  docker rm ${CONTAINER_NAME}
 }
 
 delete_container_help() {
-  echo "$(basename "$0") delete container"
+  echo "$(basename "$0") container delete"
   echo 
   echo "This command deletes the current container. The container will be stopped if it is"
   echo "running."

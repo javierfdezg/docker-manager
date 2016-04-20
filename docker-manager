@@ -5,16 +5,17 @@
 . libs/utils.sh
 . libs/init.sh
 . libs/container.sh
+. libs/run-container.sh
+. libs/connect-container.sh
+. libs/stop-container.sh
+. libs/delete-container.sh
+. libs/status-container.sh
 . libs/generate-image.sh
 . libs/push-image.sh
 . libs/pull-image.sh
 . libs/delete-image.sh
 . libs/delete-container.sh
 . libs/image.sh
-. libs/status.sh
-. libs/connect.sh
-. libs/run.sh
-. libs/stop.sh
 
 help() {
   echo "Docker Workflow Manager"
@@ -25,10 +26,10 @@ help() {
   echo  "init\t\tCreate a new docker-managed directory o reinitialize an existing one"
   echo  "image\t\tImage related commands"
   echo  "container\tContainer related commands"
-  echo  "run\t\tCreate a container and run it (or only run it if it exists)"
-  echo  "stop\t\tStop a running container"
+  echo  "run\t\tAlias for container run"
+  echo  "stop\t\tAlias for container stop"
   echo  "status\t\tDisplay the status of the container"
-  echo  "connect\t\tConnect to the container"
+  echo  "connect\t\tAlias for container connect"
   echo  
 }
 
@@ -82,11 +83,17 @@ load_docker_env() {
   fi
 }
 
+populate_global_vars() {
+  populate_image_name
+  populate_container_vars
+}
+
 run_checks() {
   check_initialization
   check_config
   start_docker_vm
   load_docker_env
+  populate_global_vars
 }
 
 case "$1" in 
@@ -99,25 +106,28 @@ case "$1" in
     run_checks
     prepare_image $@
     ;;
+  container)
+    shift
+    run_checks
+    prepare_container $@
+    ;;
+  # Aliases
 	run)
 		shift
-    run_checks
-		prepare_run $@
+    $0 container run
 		;;
 	stop)
 		shift
     run_checks
-		prepare_stop $@
+    $0 container stop
 		;;
 	connect)
 		shift
-    run_checks
-		prepare_connect $@
+    $0 container connect
 		;;
 	status)
 		shift
-    run_checks
-		prepare_status $@
+    $0 container status
 		;;
 	*|--help|-h)
 		help

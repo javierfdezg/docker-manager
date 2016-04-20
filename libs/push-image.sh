@@ -7,7 +7,7 @@
 push_image() {
 
   # Params: ask for confirmation
-  echo "$FUNCNAME"
+  echo "$FUNCNAME not available yet"
   # Get repository and image name from config file
   # Stop container
   # Delete container
