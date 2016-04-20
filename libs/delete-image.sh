@@ -14,7 +14,7 @@ delete_image() {
 }
 
 delete_image_help() {
-  echo "$(basename "$0") delete image"
+  echo "$(basename "$0") image delete"
   echo 
   echo "This command will delete the image of this project. It will also delete the"
   echo "container if it was created with the current image."

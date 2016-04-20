@@ -12,6 +12,7 @@ variables=(
   "container.run.mode::Container mode"
   "container.run.hostName::Container host name"
   "docker.dockerMachineCommand::Docker Machine command"
+  "docker.repository::DockerHub repository"
   "host::Host"
   "ip::IP"
   "localDir::Local Directory"

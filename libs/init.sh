@@ -43,6 +43,7 @@ init() {
     echo "Docker generic config"
     add_variable ${configFile} "object" "docker"
     add_variable ${configFile} "string" "docker.dockerMachineCommand"
+    add_variable ${configFile} "string" "docker.repository"
     echo
     echo "Docker image config"
     add_variable ${configFile} "object" "image"
