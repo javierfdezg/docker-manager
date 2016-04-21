@@ -30,6 +30,9 @@ run_container() {
       for mountPoint in "${CONTAINER_RUN_MOUNTS[@]}"; do
         runCommand="$runCommand ${mountPoint}"
       done;
+      for service in "${CONTAINER_RUN_SERVICES[@]}"; do
+        runCommand="$runCommand ${service}"
+      done;
       runCommand="${runCommand} --name ${CONTAINER_NAME}"
       runCommand="${runCommand} ${IMAGE_NAME}"
       runCommand="${runCommand} ${CONTAINER_RUN_COMMAND}"

@@ -13,9 +13,9 @@ generate_image() {
       exit
     fi
 
-    # TODO: delete image if exists
-    # TODO: stop container if its running
-    # TODO: delete container if exist
+    $0 container stop
+    $0 container delete
+    $0 image delete
 
     echo "Generating image with name ${IMAGE_NAME}"
     echo
