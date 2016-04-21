@@ -156,7 +156,7 @@ populate_container_vars() {
   populate_container_run_command
   populate_container_run_hostfile_entries
   populate_container_run_mounts
-  populate_container_services
+  populate_container_run_services
 }
 
 container_add_objects_to_array() {
