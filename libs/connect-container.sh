@@ -6,11 +6,18 @@
 
 connect_container() {
 
-  # Params: ask for confirmation
-  echo "$FUNCNAME"
-  # Get container name from config file
-  # Stop container if its running
-  # execute docker command to start container
+  status_container
+  case $? in
+    0)
+      prepare_status_container
+      ;;
+    1)
+      docker exec -i -t ${CONTAINER_NAME} bash
+      ;;
+    2)
+      prepare_status_container
+      ;;
+  esac
 }
 
 connect_container_help() {
