@@ -1,21 +1,24 @@
 #!/bin/sh
 
+PATH=$(brew info `basename $0` |grep Cellar| cut -d ' ' -f1)
+LIB="$PATH/lib"
+
 # Import function files
-. libs/variables.sh
-. libs/utils.sh
-. libs/init.sh
-. libs/container.sh
-. libs/run-container.sh
-. libs/connect-container.sh
-. libs/stop-container.sh
-. libs/delete-container.sh
-. libs/status-container.sh
-. libs/generate-image.sh
-. libs/push-image.sh
-. libs/pull-image.sh
-. libs/delete-image.sh
-. libs/delete-container.sh
-. libs/image.sh
+. ${LIB}/variables.sh
+. ${LIB}/utils.sh
+. ${LIB}/init.sh
+. ${LIB}/container.sh
+. ${LIB}/run-container.sh
+. ${LIB}/connect-container.sh
+. ${LIB}/stop-container.sh
+. ${LIB}/delete-container.sh
+. ${LIB}/status-container.sh
+. ${LIB}/generate-image.sh
+. ${LIB}/push-image.sh
+. ${LIB}/pull-image.sh
+. ${LIB}/delete-image.sh
+. ${LIB}/delete-container.sh
+. ${LIB}/image.sh
 
 help() {
   echo "Docker Workflow Manager"
