@@ -1,24 +1,24 @@
 #!/bin/sh
 
-PATH=$(brew info `basename $0` |grep Cellar| cut -d ' ' -f1)
-LIB="$PATH/lib"
+DM_PATH="$(dirname `which $0`)/$(readlink `which $0`)"
+DM_PATH="$(dirname $DM_PATH)/lib"
 
 # Import function files
-. ${LIB}/variables.sh
-. ${LIB}/utils.sh
-. ${LIB}/init.sh
-. ${LIB}/container.sh
-. ${LIB}/run-container.sh
-. ${LIB}/connect-container.sh
-. ${LIB}/stop-container.sh
-. ${LIB}/delete-container.sh
-. ${LIB}/status-container.sh
-. ${LIB}/generate-image.sh
-. ${LIB}/push-image.sh
-. ${LIB}/pull-image.sh
-. ${LIB}/delete-image.sh
-. ${LIB}/delete-container.sh
-. ${LIB}/image.sh
+. ${DM_PATH}/variables.sh
+. ${DM_PATH}/utils.sh
+. ${DM_PATH}/init.sh
+. ${DM_PATH}/container.sh
+. ${DM_PATH}/run-container.sh
+. ${DM_PATH}/connect-container.sh
+. ${DM_PATH}/stop-container.sh
+. ${DM_PATH}/delete-container.sh
+. ${DM_PATH}/status-container.sh
+. ${DM_PATH}/generate-image.sh
+. ${DM_PATH}/push-image.sh
+. ${DM_PATH}/pull-image.sh
+. ${DM_PATH}/delete-image.sh
+. ${DM_PATH}/delete-container.sh
+. ${DM_PATH}/image.sh
 
 help() {
   echo "Docker Workflow Manager"
