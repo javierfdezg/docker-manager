@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DM_PATH="$(dirname `which $0`)/$(readlink `which $0`)"
-DM_PATH="$(dirname $DM_PATH)/lib"
+DM_PATH="$(dirname $DM_PATH)/../lib"
 
 # Import function files
 . ${DM_PATH}/variables.sh
