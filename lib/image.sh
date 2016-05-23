@@ -6,7 +6,7 @@
 
 image_help() {
   echo "$(basename "$0") image {subcommand} [--help|-h]"
-  echo 
+  echo
   echo "Available subcommands:"
   echo
   echo "generate"

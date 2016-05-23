@@ -33,6 +33,9 @@ run_container() {
       for service in "${CONTAINER_RUN_SERVICES[@]}"; do
         runCommand="$runCommand ${service}"
       done;
+      for envVar in "${CONTAINER_RUN_ENV_VARS[@]}"; do
+        runCommand="$runCommand ${envVar}"
+      done;
       runCommand="${runCommand} --name ${CONTAINER_NAME}"
       runCommand="${runCommand} ${IMAGE_NAME}"
       runCommand="${runCommand} ${CONTAINER_RUN_COMMAND}"
@@ -45,10 +48,10 @@ run_container() {
 
 run_container_help() {
   echo "$(basename "$0") run container"
-  echo 
+  echo
   echo "This command starts the container. If the container doesn't exists, it will"
   echo "be created."
-  echo 
+  echo
 }
 
 # End of not exported functions
@@ -66,6 +69,6 @@ prepare_run_container() {
   esac
 }
 
-export -f prepare_run_container 
+export -f prepare_run_container
 
 # End of exported functions

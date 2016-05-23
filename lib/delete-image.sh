@@ -11,16 +11,16 @@ delete_image() {
     $0 container delete
 
     # TODO: detect if image exists before executing the command
-    docker rmi ${IMAGE_NAME} 
+    docker rmi ${IMAGE_NAME}
   fi
 }
 
 delete_image_help() {
   echo "$(basename "$0") image delete"
-  echo 
+  echo
   echo "This command will delete the image of this project. It will also delete the"
   echo "container if it was created with the current image."
-  echo 
+  echo
 }
 
 # End of not exported functions

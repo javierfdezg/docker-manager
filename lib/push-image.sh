@@ -15,10 +15,10 @@ push_image() {
 
 push_image_help() {
   echo "$(basename "$0") image push"
-  echo 
+  echo
   echo "This command will attempt to push an exising image to a dockerhub"
   echo "repository."
-  echo 
+  echo
 }
 
 # End of not exported functions

@@ -7,7 +7,7 @@
 delete_container() {
 
   status_container
-  case $? in 
+  case $? in
     0)
       echo "No container ${CONTAINER_NAME} found. Doing nothing."
       exit
@@ -23,10 +23,10 @@ delete_container() {
 
 delete_container_help() {
   echo "$(basename "$0") container delete"
-  echo 
+  echo
   echo "This command deletes the current container. The container will be stopped if it is"
   echo "running."
-  echo 
+  echo
 }
 
 # End of not exported functions

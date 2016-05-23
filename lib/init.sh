@@ -10,14 +10,14 @@ configFile='dmconfig.json'
 
 init_help() {
   echo "$(basename "$0") init"
-  echo 
+  echo
   echo "This command creates a docker-managed directory - basically a configuration file"
   echo "that tells $(basename "$0") that this directory is being docker-managed."
-  echo 
+  echo
   echo "If you execute $(basename "$0") init, you will be asked if you want to initialize"
   echo "this directory (or reinitialize it if you did it before). This will launch a "
   echo "wizard that will generate a JSON configuration file and prompt for the config"
-  echo "values." 
+  echo "values."
   echo
 }
 
@@ -35,11 +35,11 @@ init() {
 
     # Objects/Arrays must be created before inserting new attributes
     # TODO: Issue #3: Adding a variable to a path should create parent objects
-    
+
     echo "Project config"
     add_variable ${configFile} "string" "projectName"
     add_variable ${configFile} "string" "projectAddonsDir"
-    echo 
+    echo
     echo "Docker generic config"
     add_variable ${configFile} "object" "docker"
     add_variable ${configFile} "string" "docker.dockerMachineCommand"
@@ -51,13 +51,14 @@ init() {
     echo
     echo "Docker container config"
     add_variable ${configFile} "object" "container"
-    add_variable ${configFile} "string" "container.name" 
+    add_variable ${configFile} "string" "container.name"
     echo
     echo "Docker run config"
     add_variable ${configFile} "object" "container.run"
     add_variable ${configFile} "string" "container.run.hostName"
     add_variable ${configFile} "string" "container.run.mode"
     add_variable ${configFile} "string" "container.run.command"
+    add_variable ${configFile} "array"  "container.run.environmentVariables" "varName:varValue"
     add_variable ${configFile} "array"  "container.run.hostsFileEntries" "ip:host"
     add_variable ${configFile} "array"  "container.run.mounts"  "localDir:containerDir"
     add_variable ${configFile} "array"  "container.run.services" "name:localPort:containerPort"

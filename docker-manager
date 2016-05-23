@@ -1,7 +1,16 @@
 #!/bin/sh
 
-DM_PATH="$(dirname `which $0`)/$(readlink `which $0`)"
-DM_PATH="$(dirname $DM_PATH)/../lib"
+CMD=$0
+
+if [[ "$1" == "--dev" ]];
+then
+  shift
+  CMD="$0 --dev"
+  DM_PATH="lib"
+else 
+  DM_PATH="$(dirname `which ${CMD}`)/$(readlink `which ${CMD}`)"
+  DM_PATH="$(dirname $DM_PATH)/../lib"
+fi
 
 # Import function files
 . ${DM_PATH}/variables.sh
@@ -22,7 +31,7 @@ DM_PATH="$(dirname $DM_PATH)/../lib"
 
 help() {
   echo "Docker Workflow Manager"
-  echo "Usage: $(basename $0) {command} [subcomand] [--help|-h]"
+  echo "Usage: $(basename ${CMD}) {command} [subcomand] [--help|-h]"
   echo
   echo "Available commands:"
   echo
@@ -33,17 +42,17 @@ help() {
   echo  "stop\t\tAlias for container stop"
   echo  "status\t\tDisplay the status of the container"
   echo  "connect\t\tAlias for container connect"
-  echo  
+  echo
 }
 
 check_initialization() {
   if [ ! -f ${configFile} ]; then
-    echo "This directory has not been initialized for $(basename $0)".
+    echo "This directory has not been initialized for $(basename ${CMD})".
     echo
     if ask "Do you want to initialize it now?" Y; then
-      prepare_init 
+      prepare_init
     else
-      echo "You need to set up $(basename $0) before using it... exiting"
+      echo "You need to set up $(basename ${CMD}) before using it... exiting"
       exit
     fi
   fi
@@ -99,7 +108,7 @@ run_checks() {
   populate_global_vars
 }
 
-case "$1" in 
+case "$1" in
 	init)
 		shift
     prepare_init $@
@@ -117,20 +126,20 @@ case "$1" in
   # Aliases
 	run)
 		shift
-    $0 container run
+    ${CMD} container run
 		;;
 	stop)
 		shift
     run_checks
-    $0 container stop
+    ${CMD} container stop
 		;;
 	connect)
 		shift
-    $0 container connect
+    ${CMD} container connect
 		;;
 	status)
 		shift
-    $0 container status
+    ${CMD} container status
 		;;
 	*|--help|-h)
 		help
