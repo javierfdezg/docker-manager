@@ -22,9 +22,9 @@ connect_container() {
 
 connect_container_help() {
   echo "$(basename "$0") container connect"
-  echo 
+  echo
   echo "Connect to the container if its running"
-  echo 
+  echo
 }
 
 # End of not exported functions

@@ -14,9 +14,9 @@ stop_container() {
 
 stop_container_help() {
   echo "$(basename "$0") container stop"
-  echo 
+  echo
   echo "This command stops the current container if its running."
-  echo 
+  echo
 }
 
 # End of not exported functions

@@ -45,10 +45,10 @@ run_container() {
 
 run_container_help() {
   echo "$(basename "$0") run container"
-  echo 
+  echo
   echo "This command starts the container. If the container doesn't exists, it will"
   echo "be created."
-  echo 
+  echo
 }
 
 # End of not exported functions
@@ -66,6 +66,6 @@ prepare_run_container() {
   esac
 }
 
-export -f prepare_run_container 
+export -f prepare_run_container
 
 # End of exported functions

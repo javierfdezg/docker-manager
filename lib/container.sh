@@ -18,7 +18,7 @@ add_object_to_array() {
 
 container_help() {
   echo "$(basename "$0") container {subcommand} [--help|-h]"
-  echo 
+  echo
   echo "Available subcommands:"
   echo
   echo "run"
@@ -80,7 +80,7 @@ populate_container_run_hostfile_entries() {
       local hostFilesEntryLen=$(echo $requested_var | jq 'length')
       if [[ $hostFilesEntryLen == 0 ]]; then
         CONTAINER_RUN_HOSTFILEENTRIES=()
-      else 
+      else
         for i in $(seq 0 $(($hostFilesEntryLen-1))); do
           local IP=$(echo $requested_var | jq ".[$i] | .ip" | tr -d '"')
           local HOST=$(echo $requested_var | jq ".[$i] | .host" | tr -d '"')
@@ -105,7 +105,7 @@ populate_container_run_mounts() {
       local mountsLen=$(echo $requested_var | jq 'length')
       if [[ $mountsLen == 0 ]]; then
         CONTAINER_RUN_MOUNTS=()
-      else 
+      else
         for i in $(seq 0 $(($mountsLen-1))); do
           local localDir=$(echo $requested_var | jq ".[$i] | .localDir" | tr -d '"')
           local containerDir=$(echo $requested_var | jq ".[$i] | .containerDir" | tr -d '"')
@@ -130,7 +130,7 @@ populate_container_run_services() {
       local servicesLen=$(echo $requested_var | jq 'length')
       if [[ $servicesLen == 0 ]]; then
         CONTAINER_RUN_SERVICES=()
-      else 
+      else
         for i in $(seq 0 $(($servicesLen-1))); do
           local localPort=$(echo $requested_var | jq ".[$i] | .localPort" | tr -d '"')
           local containerPort=$(echo $requested_var | jq ".[$i] | .containerPort" | tr -d '"')

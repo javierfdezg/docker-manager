@@ -27,10 +27,10 @@ generate_image() {
 
 generate_image_help() {
   echo "$(basename "$0") image generate"
-  echo 
+  echo
   echo "This command will attempt to update an exising image from a dockerhub"
   echo "repository."
-  echo 
+  echo
 }
 
 # End of not exported functions

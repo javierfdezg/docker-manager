@@ -33,7 +33,7 @@ help() {
   echo  "stop\t\tAlias for container stop"
   echo  "status\t\tDisplay the status of the container"
   echo  "connect\t\tAlias for container connect"
-  echo  
+  echo
 }
 
 check_initialization() {
@@ -41,7 +41,7 @@ check_initialization() {
     echo "This directory has not been initialized for $(basename $0)".
     echo
     if ask "Do you want to initialize it now?" Y; then
-      prepare_init 
+      prepare_init
     else
       echo "You need to set up $(basename $0) before using it... exiting"
       exit
@@ -99,7 +99,7 @@ run_checks() {
   populate_global_vars
 }
 
-case "$1" in 
+case "$1" in
 	init)
 		shift
     prepare_init $@

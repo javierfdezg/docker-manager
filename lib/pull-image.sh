@@ -6,7 +6,7 @@
 
 pull_image() {
   # Params: ask for confirmation
-  echo "$FUNCNAME not available yet" 
+  echo "$FUNCNAME not available yet"
   # Get repository and image name from config file
   # Stop container
   # Delete container
@@ -14,10 +14,10 @@ pull_image() {
 
 pull_image_help() {
   echo "$(basename "$0") image pull"
-  echo 
+  echo
   echo "This command will attempt to update an exising image from a dockerhub"
   echo "repository."
-  echo 
+  echo
 }
 
 # End of not exported functions

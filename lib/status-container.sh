@@ -6,9 +6,9 @@
 
 status_container_help() {
   echo "$(basename "$0") container status"
-  echo 
+  echo
   echo "This command shows the status of the current container."
-  echo 
+  echo
 }
 
 # End of not exported functions
@@ -22,9 +22,9 @@ status_container() {
     return 1
   else
     docker ps -a | if grep -w --silent ${CONTAINER_NAME}; then
-      # Container exists but is not running 
+      # Container exists but is not running
       return 2
-    else 
+    else
       # Container doesn't exist
       return 0
     fi
@@ -33,7 +33,7 @@ status_container() {
 
 show_status_container() {
   status_container
-  case $? in 
+  case $? in
     0)
       echo "Container ${CONTAINER_NAME} does not exist"
       ;;
@@ -57,6 +57,6 @@ prepare_status_container() {
   esac
 }
 
-export -f prepare_status_container status_container 
+export -f prepare_status_container status_container
 
 # End of exported functions
