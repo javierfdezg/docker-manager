@@ -145,6 +145,31 @@ populate_container_run_services() {
       fi
     fi
 }
+
+populate_container_env_vars() {
+    local containerSearchVar="container.run.environmentVariables"
+    get_variable ${configFile} ${containerSearchVar}
+    if [[ "$requested_var" == "" ]]; then
+      CONTAINER_RUN_ENV_VARS=()
+    else
+      local envVarsLen=$(echo $requested_var | jq 'length')
+      if [[ $envVarsLen == 0 ]]; then
+        CONTAINER_RUN_ENV_VARS=()
+      else
+        for i in $(seq 0 $(($envVarsLen-1))); do
+          local varName=$(echo $requested_var | jq ".[$i] | .varName" | tr -d '"')
+          local varValue=$(echo $requested_var | jq ".[$i] | .varValue" | tr -d '"')
+
+          if [[ "$varName" == "" || "$varValue" == "" ]]; then
+            echo "Malformed variable with name: $varName and value: $varValue"
+            exit
+          fi
+
+          CONTAINER_RUN_ENV_VARS+=" -e ${varName}=${varValue} "
+        done
+      fi
+    fi
+}
 # End of not exported functions
 
 # Start of exported functions
@@ -157,6 +182,7 @@ populate_container_vars() {
   populate_container_run_hostfile_entries
   populate_container_run_mounts
   populate_container_run_services
+  populate_container_env_vars
 }
 
 container_add_objects_to_array() {

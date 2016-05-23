@@ -58,6 +58,7 @@ init() {
     add_variable ${configFile} "string" "container.run.hostName"
     add_variable ${configFile} "string" "container.run.mode"
     add_variable ${configFile} "string" "container.run.command"
+    add_variable ${configFile} "array"  "container.run.environmentVariables" "varName:varValue"
     add_variable ${configFile} "array"  "container.run.hostsFileEntries" "ip:host"
     add_variable ${configFile} "array"  "container.run.mounts"  "localDir:containerDir"
     add_variable ${configFile} "array"  "container.run.services" "name:localPort:containerPort"

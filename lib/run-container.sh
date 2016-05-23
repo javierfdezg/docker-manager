@@ -33,6 +33,9 @@ run_container() {
       for service in "${CONTAINER_RUN_SERVICES[@]}"; do
         runCommand="$runCommand ${service}"
       done;
+      for envVar in "${CONTAINER_RUN_ENV_VARS[@]}"; do
+        runCommand="$runCommand ${envVar}"
+      done;
       runCommand="${runCommand} --name ${CONTAINER_NAME}"
       runCommand="${runCommand} ${IMAGE_NAME}"
       runCommand="${runCommand} ${CONTAINER_RUN_COMMAND}"

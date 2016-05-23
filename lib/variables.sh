@@ -11,6 +11,8 @@ variables=(
   "container.name::Container name"
   "container.run.mode::Container mode"
   "container.run.hostName::Container host name"
+  "container.run.command::Run command"
+  "container.run.environmentVariables::Environment variables"
   "docker.dockerMachineCommand::Docker Machine command"
   "docker.repository::DockerHub repository"
   "docker.container.run.command::Docker container run command"
@@ -21,6 +23,8 @@ variables=(
   "name::Name"
   "localPort::Local port"
   "containerPort::Container port"
+  "varName::Variable name"
+  "varValue::Variable value"
 )
 
 defaults=(
@@ -114,6 +118,9 @@ add_variable() {
     cat $1 | jq ".$3=[]" | sponge $1
 
     case "$3" in
+      "container.run.environmentVariables")
+        container_add_objects_to_array 'enviromnent variables' $1 $3 $4
+        ;;
       "container.run.hostsFileEntries")
         container_add_objects_to_array 'host file entries' $1 $3 $4
         ;;
