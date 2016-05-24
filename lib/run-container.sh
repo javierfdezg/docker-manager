@@ -40,6 +40,11 @@ run_container() {
       runCommand="${runCommand} ${IMAGE_NAME}"
       runCommand="${runCommand} ${CONTAINER_RUN_COMMAND}"
 
+      if [[ ${DEBUG} == "yes" ]];
+      then
+        echo ${runCommand}
+        read
+      fi
       ${runCommand}
 
       ;;

@@ -165,7 +165,7 @@ populate_container_env_vars() {
             exit
           fi
 
-          CONTAINER_RUN_ENV_VARS+=" -e ${varName}=${varValue} "
+          CONTAINER_RUN_ENV_VARS+=" -e ${varName}='${varValue}' "
         done
       fi
     fi

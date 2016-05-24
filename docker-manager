@@ -1,13 +1,15 @@
 #!/bin/sh
 
 CMD=$0
+DEBUG="no"
 
 if [[ "$1" == "--dev" ]];
 then
   shift
   CMD="$0 --dev"
   DM_PATH="lib"
-else 
+  DEBUG="yes"
+else
   DM_PATH="$(dirname `which ${CMD}`)/$(readlink `which ${CMD}`)"
   DM_PATH="$(dirname $DM_PATH)/../lib"
 fi
