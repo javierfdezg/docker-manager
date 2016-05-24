@@ -10,6 +10,11 @@ then
   DM_PATH="lib"
   DEBUG="yes"
 else
+  if [[ "$1" == "--debug" ]];
+  then
+    shift
+    DEBUG="yes"
+  fi
   DM_PATH="$(dirname `which ${CMD}`)/$(readlink `which ${CMD}`)"
   DM_PATH="$(dirname $DM_PATH)/../lib"
 fi
